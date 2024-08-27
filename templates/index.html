@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="welcome-container">
+        <h1>Welcome to Your Expense Tracker</h1>
+        <p>Track and manage your expenses efficiently.</p>
+        <a class="btn" id="add-expense-button" href="{{ url_for('add_expense') }}">Add Expense</a>
+    </div>
+{% endblock %}

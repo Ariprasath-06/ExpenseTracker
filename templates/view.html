@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ period.capitalize() }} Expenses{% endblock %}
+
+{% block content %}
+<h1>{{ period.capitalize() }} Expenses</h1>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Amount (₹)</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.id }}</td>
+            <td>{{ expense.category }}</td>
+            <td>₹{{ expense.amount }}</td>
+            <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+            <td>
+                <a href="{{ url_for('delete_expense', id=expense.id, period=period) }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td colspan="2"><strong>₹{{ total_amount }}</strong></td>
+        </tr>
+    </tbody>
+</table>
+<a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Monthly{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Monthly Expense Report</h1>
+        <h2>Total Amount: ₹{{ total_amount }}</h2>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.category }}</td>
+                <td>₹{{ expense.amount }}</td>
+                <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ expense.time.strftime('%H:%M:%S') }}</td>
+                <td>
+                    <a href="{{ url_for('delete_expense', id=expense.id) }}" class="delete-btn">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('index') }}" class="back-button">Back to Home</a>
+</div>
+{% endblock %}

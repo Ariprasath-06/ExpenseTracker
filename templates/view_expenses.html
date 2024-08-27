@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}View Expenses{% endblock %}
+
+{% block content %}
+    <h2>Daily Expenses</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Amount (₹)</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.id }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ expense.time.strftime('%H:%M:%S') }}</td>
+                <td><a href="{{ url_for('delete_expense', id=expense.id) }}" class="delete-btn">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total Amount: ₹{{ total_amount }}</p>
+    <a href="/" class="back-button">Back to Home</a>
+{% endblock %}

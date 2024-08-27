@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Add Expense{% endblock %}
+
+{% block content %}
+    <div class="form-container" style = "text-align:center">
+        <h2>Add a New Expense</h2>
+        <form action="{{ url_for('add_expense') }}" method="POST">
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" required>
+
+            <label for="amount">Amount (₹):</label>
+            <input type="number" id="amount" name="amount" step="0.01" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current date and time
+            const now = new Date();
+
+            // Format date as YYYY-MM-DD
+            const formattedDate = now.toISOString().split('T')[0];
+            // Format time as HH:MM
+            const formattedTime = now.toTimeString().split(' ')[0].slice(0, 5);
+
+            // Set the date and time fields
+            document.getElementById('date').value = formattedDate;
+            document.getElementById('time').value = formattedTime;
+        });
+    </script>
+{% endblock %}
